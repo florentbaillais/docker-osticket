@@ -15,7 +15,7 @@ It has a few modifications:
   * Now designed to work with a linked [MySQL](https://registry.hub.docker.com/u/library/mysql/) docker container.
   * Automates configuration file & database installation
   * EMail support 
-
+  * [Memcached](https://bitnami.com/stack/memcached) by Bitnami
 OSTicket is being served by [nginx](http://wiki.nginx.org/Main) using [PHP-FPM](http://php-fpm.org/) with PHP5. 
 PHP5's [mail](http://php.net/manual/en/function.mail.php) function is configured to use [msmtp](http://msmtp.sourceforge.net/) to send out-going messages.
 
