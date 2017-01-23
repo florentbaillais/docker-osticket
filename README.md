@@ -3,14 +3,14 @@ Osticket
 
 # Introduction
 
-Docker image for running version 1.10 RC3 of [OSTicket](http://osticket.com/).
+Docker image for running version 1.10 of [OSTicket](http://osticket.com/).
 
-This image has been created from the original docker-osticket image by [Petter A. Helset](mailto:petter@helset.eu).
+This image has been created from the original docker-osticket image by [Petter A. Helset](mailto:petter@helset.eu) forked by [interlegis](mailto:ti@interlegis.leg.br)
 
 It has a few modifications:
 
   * Documentation added, hurray!
-  * Base OS image fixed to Ubuntu 14.04
+  * Base OS image fixed to Debian 8
   * AJAX issues fixed that made original image unusable
   * Now designed to work with a linked [MySQL](https://registry.hub.docker.com/u/library/mysql/) docker container.
   * Automates configuration file & database installation
@@ -19,33 +19,12 @@ It has a few modifications:
 OSTicket is being served by [nginx](http://wiki.nginx.org/Main) using [PHP-FPM](http://php-fpm.org/) with PHP5. 
 PHP5's [mail](http://php.net/manual/en/function.mail.php) function is configured to use [msmtp](http://msmtp.sourceforge.net/) to send out-going messages.
 
-The `setup/` directory has been renamed as `setup_hidden/` and the file system permissions deny nginx access to this
-location. It was not removed as the setup files are required as part of the automatic configuration during container
-start.
-
 # Docker compose file
 
 Ensure you have docker compose install in your computer before.
 
 ```bash
-version: '2'
-services:
-  osticket:
-   image: matiasvictor/docker-osticket
-   ports:
-    - "80:80"
-   links:
-    - mysql:mysql
-
-  mysql:
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: mysecretpw
-      MYSQL_DATABASE: osticket
-      MYSQL_USER: osticket
-      MYSQL_PASSWORD: mysecretpw
-
+## see docker-compose.yml ###
 ```
 
 Wait for the installation to complete then browse to your OSTicket staff control panel at `http://localhost:8080/scp`. Login with default admin user & password:
