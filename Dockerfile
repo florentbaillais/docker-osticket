@@ -1,5 +1,5 @@
 FROM debian:8
-MAINTAINER Thiago Almeida <thiagoalmeidasa@gmail.com>
+MAINTAINER Florent Baillais <florent.baillais+docker@gmail.com>
 
 # setup workdir
 RUN mkdir /data
@@ -40,15 +40,19 @@ RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/downl
     chmod 700 /data/upload/setup_hidden && \
     chown -R www-data:www-data /data/upload/ && \
     chmod -R 755 /data/upload/
-    
+
 # Download languages packs
-   RUN wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
-    wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar  
+RUN wget -nv -O upload/include/i18n/fr.phar http://osticket.com/sites/default/files/download/lang/fr.phar && \
+    wget -nv -O upload/include/i18n/ar.phar http://osticket.com/sites/default/files/download/lang/ar.phar && \
+    wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
+    wget -nv -O upload/include/i18n/it.phar http://osticket.com/sites/default/files/download/lang/it.phar && \
+    wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar && \
+    wget -nv -O upload/include/i18n/de.phar http://osticket.com/sites/default/files/download/lang/de.phar
 
 # Download LDAP
    RUN wget -v -O upload/include/plugins/auth-ldap.phar http://www.osticket.com/sites/default/files/download/plugin/auth-ldap.phar
 
-  
+
 # Configure nginx
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf && \
     sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf && \
@@ -69,5 +73,5 @@ ADD supervisord.conf /data/supervisord.conf
 ADD msmtp.conf /data/msmtp.conf
 ADD bin/ /data/bin
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["/data/bin/start.sh"]
