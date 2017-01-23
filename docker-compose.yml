@@ -3,13 +3,14 @@ services:
   osticket:
     build: .
     ports:
-     - "80:80"
+     - "8080:8080"
     links:
      - mysql:mysql   
      - memcached:memcached
     environment:
        USE_MEMCACHE: y
-
+    container_name: osticket
+    
   mysql:
     image: mysql
     restart: always     
@@ -18,10 +19,11 @@ services:
       MYSQL_DATABASE: osticket
       MYSQL_USER: osticket
       MYSQL_PASSWORD: mysecretpw
-
+    container_name: mysql_osticket
+    
   memcached:
     image: bitnami/memcached:latest
     restart: always
-          
+    container_name: memcached_osticket      
 
  
