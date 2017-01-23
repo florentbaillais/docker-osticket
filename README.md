@@ -24,7 +24,7 @@ PHP5's [mail](http://php.net/manual/en/function.mail.php) function is configured
 Ensure you have docker compose install in your computer before.
 
 ```bash
-## see docker-compose.yml ###
+## rename docker-compose-externalDB.yml or docker-compose-linkedDB.yml to docker-compose.yml ###
 ```
 
 Wait for the installation to complete then browse to your OSTicket staff control panel at `http://localhost:8080/scp`. Login with default admin user & password:
