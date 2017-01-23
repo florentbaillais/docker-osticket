@@ -1,0 +1,25 @@
+version: '2'
+services:
+  osticket:
+    build: .
+    ports:
+     - "8080:8080"
+    links:
+     - memcached:memcached
+    environment:
+       USE_MEMCACHE: y
+       MYSQL_HOST: mydb.mydomain.com
+       MYSQL_ROOT_PASSWORD: mypassword
+       MYSQL_DATABASE: osticket
+       MYSQL_USER: root
+       MYSQL_PASSWORD: mypaswword
+       SMTP_HOST: smtp.gmail.com
+       SMTP_PORT: 587
+       SMTP_USER: myadress@gmail.com
+       SMTP_PASSWORD: mygmailpassword
+    container_name: osticket
+
+  memcached:
+    image: bitnami/memcached:latest
+    restart: always
+    container_name: memcached_osticket

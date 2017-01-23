@@ -9,6 +9,10 @@ services:
      - memcached:memcached
     environment:
        USE_MEMCACHE: y
+       SMTP_HOST: smtp.gmail.com
+       SMTP_PORT: 587
+       SMTP_USER: myadress@gmail.com
+       SMTP_PASSWORD: mygmailpassword
     container_name: osticket
     
   mysql:
@@ -24,6 +28,4 @@ services:
   memcached:
     image: bitnami/memcached:latest
     restart: always
-    container_name: memcached_osticket      
-
- 
+    container_name: memcached_osticket
